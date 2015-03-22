@@ -5,6 +5,7 @@
 	var sleepStarted;
 	var shutdown;
 	var sleepTimer;
+	var started;
 
 	chrome.runtime.onMessage.addListener(function(data, sender, sendResponse) {	
 		switch (data.action) {
@@ -22,7 +23,8 @@
 			case 'update':
 				sendResponse({
 					timeDiff: interval ? parseInt((sleepTimer-(new Date() - startTime)) / 60 / 1000) : false,
-					shutdown: shutdown
+					shutdown: shutdown,
+					started: started
 				});
 				break;
 
@@ -51,6 +53,7 @@
 	}
 
 	function start(data) {
+		started = true;
 		startTime = new Date();
 		shutdown = data.shutdown;
 		sleepTimer = data.sleepTimer;

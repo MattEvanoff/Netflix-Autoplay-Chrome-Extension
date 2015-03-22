@@ -1,8 +1,8 @@
 {
-	"name": "Netflix Autoplayer",
-	"version": "0.2",
+	"name": "Netflix Autoplayer - With System Sleep Timer",
+	"version": "0.3",
 	"manifest_version": 2,
-	"description": "Autoplays Netflix TV Shows",
+	"description": "Autoplays Netflix TV Shows - Shuts down computer when done",
 	"author": "Matt Evanoff - RTPMatt+autoplay@gmail.com",
 	"homepage_url": "http://www.mattevanoff.com",
 	"permissions": [
@@ -29,5 +29,9 @@
 	"background":{
 		"scripts":["background.js"],
 		"persistent": true
-	}
+	},
+	"options_ui": {
+		"page": "prefs.html",
+		"chrome_style": true
+	}	
 }

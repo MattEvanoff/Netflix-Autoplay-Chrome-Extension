@@ -1,5 +1,8 @@
 window.addEventListener('load', function() {
 	var interval;
+	//Check if user has set options
+	var sleep = localStorage.sleep || 120;
+	var shutdown = JSON.parse(localStorage.shutdown);
 
 	//Check if we have already started
 	chrome.tabs.getSelected(function(tab){	
@@ -8,8 +11,14 @@ window.addEventListener('load', function() {
 		};
 
 		chrome.tabs.sendMessage(tab.id, opts, function(results) {
-			document.getElementById('sleepText').innerHTML = results.timeDiff || ' - ';
-			document.getElementById('shutdown').checked = results.shutdown;			
+
+			if(!results.started) { //Not started, use default values
+				document.getElementById('sleep').value = sleep;
+				document.getElementById('shutdown').checked = shutdown;
+			} else {				//Started, use working values
+				document.getElementById('sleepText').innerHTML = results.timeDiff || ' - ';
+				document.getElementById('shutdown').checked = results.shutdown;
+			}
 		});
 	});
 
