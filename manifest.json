@@ -1,0 +1,34 @@
+{
+	"key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDcBHwzDvyBQ6bDppkIs9MP4ksKqCMyXQ/A52JivHZKh4YO/9vJsT3oaYhSpDCE9RPocOEQvwsHsFReW2nUEc6OLLyoCFFxIb7KkLGsmfakkut/fFdNJYh0xOTbSN8YvLWcqph09XAY2Y/f0AL7vfO1cuCqtkMt8hFrBGWxDdf9CQIDAQAB",
+	"name": "Netflix Autoplayer",
+	"version": "0.1",
+	"manifest_version": 2,
+	"description": "Autoplays Netflix TV Shows",
+	"author": "Matt Evanoff - RTPMatt+autoplay@gmail.com",
+	"homepage_url": "http://www.mattevanoff.com",
+	"permissions": [
+		"tabs",
+		"nativeMessaging",
+		"background",
+		"http://*.netflix.com/*", 
+		"https://*.netflix.com/*"
+	],	
+	"page_action": {
+		"default_icon": "icon38.png",
+		"default_title": "Netflix Autoplay",
+		"default_popup": "options.html"		
+	},
+	"icons": {
+		"128": "icon-128.png"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*.netflix.com/*", "https://*.netflix.com/*"],
+			"js": ["netflix.js"]		
+		}
+	],
+	"background":{
+		"scripts":["background.js"],
+		"persistent": true
+	}
+}
