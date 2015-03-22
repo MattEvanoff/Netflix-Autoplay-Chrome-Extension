@@ -58,4 +58,6 @@ window.addEventListener('load', function() {
 		}
 	});
 
+	var URL = chrome.extension.getURL('install.bat');
+	document.getElementById('download').href = URL;
 });
