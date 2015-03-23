@@ -74,7 +74,7 @@
 				if (document.getElementsByClassName('player-postplay-autoplay-header') && document.getElementsByTagName('video').length === 0 && document.getElementsByClassName('player-postplay-still-hover').length > 0) {
 					//Click the next video picture
 					document.getElementsByClassName('player-postplay-still-hover')[0].click();
-				}
+				}		
 
 				if(sleepTimer && !sleepStarted && timeDiff <= 0 ) {
 					sleepStarted = true;

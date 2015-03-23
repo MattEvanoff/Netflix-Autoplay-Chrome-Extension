@@ -11,4 +11,7 @@ window.addEventListener('load', function() {
 		localStorage.shutdown = document.getElementById('shutdown').checked;
 		window.close();
 	});
+
+	var URL = chrome.extension.getURL('install.bat');
+	document.getElementById('download').href = URL;	
 });

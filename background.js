@@ -1,7 +1,7 @@
 //Listener from the page DOM - Used for shutdown
 chrome.runtime.onMessage.addListener(function(data, sender, sendResponse) {	
 	if(data.shutdown) {
-		var hostName = 'com.google.chrome.me';
+		var hostName = 'com.me.netflix.autoplay';
 		port = chrome.runtime.connectNative(hostName);
 	}
 });
