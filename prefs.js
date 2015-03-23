@@ -9,5 +9,6 @@ window.addEventListener('load', function() {
 	document.getElementById('save').addEventListener('click', function() {		
 		localStorage.sleep = document.getElementById('sleep').value || 120;
 		localStorage.shutdown = document.getElementById('shutdown').checked;
+		window.close();
 	});
 });
