@@ -2,7 +2,7 @@ window.addEventListener('load', function() {
 	var interval;
 	//Check if user has set options
 	var sleep = localStorage.sleep || 120;
-	var shutdown = JSON.parse(localStorage.shutdown);
+	var shutdown = localStorage.shutdown ? JSON.parse(localStorage.shutdown) : false;
 
 	//Check if we have already started
 	chrome.tabs.getSelected(function(tab){	

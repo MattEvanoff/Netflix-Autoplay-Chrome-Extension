@@ -1,6 +1,6 @@
 {
 	"name": "Netflix Autoplayer - With System Sleep Timer",
-	"version": "0.3",
+	"version": "0.4",
 	"manifest_version": 2,
 	"description": "Autoplays Netflix TV Shows - Shuts down computer when done",
 	"author": "Matt Evanoff - RTPMatt+autoplay@gmail.com",
