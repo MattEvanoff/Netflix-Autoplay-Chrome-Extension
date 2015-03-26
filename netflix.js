@@ -10,25 +10,25 @@
 	var started;
 
 	chrome.runtime.onMessage.addListener(function(data, sender, sendResponse) {
-		console.log(data);
-		console.log(sender);
-		console.log(sendResponse);
 		switch (data.action) {
 			case 'play-pause':
 				if(document.getElementsByClassName('player-play-pause').length > 0) {
 					document.getElementsByClassName('player-play-pause')[0].click();
 				}
 				break;
+
 			case 'next':
 				if(document.getElementsByClassName('player-next-episode').length > 0) {
 					document.getElementsByClassName('player-next-episode')[0].click();
 				}
-				break;						
+				break;
+
 			case 'stop':
 				if(document.getElementsByClassName('player-back-to-browsing').length > 0) {
 					document.getElementsByClassName('player-back-to-browsing')[0].click();
 				}						
 				break;
+
 			case 'prev':
 				break;
 
