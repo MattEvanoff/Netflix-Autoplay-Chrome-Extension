@@ -6,15 +6,26 @@
 	var startTime;
 	var sleepStarted;
 	var shutdown;
-	var sleepTimer;
+
+	var sleepTimer; //Length of time sleep time is - in ms
 	var started;
+
+	var pauseStart;
+	var pauseStop;
 
 	chrome.runtime.onMessage.addListener(function(data, sender, sendResponse) {
 		switch (data.action) {
 			case 'play-pause':
+				pauseStop = pauseStart ? new Date() : false;
+				pauseStart = pauseStart || new Date();
+				if(pauseStart && pauseStop) {
+					var pausedTime = pauseStop - pauseStart;
+
+					//sleepTimer - fix sleep timer so pause doesn't count
+				}
 				if(document.getElementsByClassName('player-play-pause').length > 0) {
 					document.getElementsByClassName('player-play-pause')[0].click();
-				}
+				}				
 				break;
 
 			case 'next':
@@ -69,6 +80,7 @@
 		}	
 
 		//Run shutdown command
+		console.log(shutdown);
 		if(shutdown) {
 			chrome.runtime.sendMessage({shutdown: 'now'});
 		}
@@ -115,5 +127,24 @@
 			interval = false;
 		}	
 	}
+
+	//Ctrl + q = shutdown
+	document.addEventListener('keypress', function(e){
+		console.log(e);
+		if(e.which === 17 && e.ctrlKey === true) {
+			sleepStarted = true;
+			sleep();
+		}
+	});
+
+	//setup watcher for pause button
+	var i = setInterval(function() {
+		if(document.getElementsByClassName('player-play-pause').length > 0) {
+			document.getElementsByClassName('player-play-pause')[0].addEventListener('click', function(e) {		
+				//do pause things
+			});
+			clearInterval(i);
+		}
+	}, 1000);
 
 })();
