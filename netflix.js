@@ -80,7 +80,6 @@
 		}	
 
 		//Run shutdown command
-		console.log(shutdown);
 		if(shutdown) {
 			chrome.runtime.sendMessage({shutdown: 'now'});
 		}
@@ -130,7 +129,6 @@
 
 	//Ctrl + q = shutdown
 	document.addEventListener('keypress', function(e){
-		console.log(e);
 		if(e.which === 17 && e.ctrlKey === true) {
 			sleepStarted = true;
 			sleep();
