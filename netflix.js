@@ -3,6 +3,7 @@
 	chrome.runtime.sendMessage({command: 'activateTab'});
 
 	var interval;				//holder for our main loop
+	var pauseInterval;			//holder for loop to watch for pause button
 
 	var startTime;				//Date object of when user started sleep timer
 	var sleepTimer; 			//Length of time sleep time is - in ms (0 = infinite)
@@ -75,18 +76,21 @@
 
 	//Pauses video, then puts then runs the shutdown if the user wants
 	function sleep() {
+		var pauseSleepInterval;
+		var pauseButton;
+
 		clearInterval(interval);
 		interval = false;
 		
 		//This just delays sleep if the current episode has been minimised - we wait till the start of the next to pause and shutdown
-		var pause = document.getElementsByClassName('player-play-pause');
-		var pauseSleep = setInterval(function() {
+		pauseButton = document.getElementsByClassName('player-play-pause');
+		pauseSleepInterval = setInterval(function() {
 			if(pause.length > 0) {
-				clearInterval(pauseSleep);
+				clearInterval(pauseSleepInterval);
 				pauseSleep = false;
 
 				//pause playback
-				pause[0].click();
+				pauseButton[0].click();
 
 				//Run shutdown command
 				if(shutdown) {
@@ -147,6 +151,7 @@
 
 	function exit() {
 		started = false;
+		clearPause();
 		if(!interval) {
 			alert('You probably have to start before you exit.');
 		} else {
@@ -155,37 +160,44 @@
 			interval = false;
 		}	
 	}
-
-	//Ctrl + q = shutdown
+	
 	document.addEventListener('keypress', function(e){
-		if(e.which === 17 && e.ctrlKey === true) {
+		if(e.which === 17 && e.ctrlKey === true) {	//Ctrl + q = shutdown
 			sleepStarted = true;
+			exit();
 			sleep();
+		} else if(e.which === 32) {		//Stop countdown while paused (spacebar support)
+			pauseFix();
 		}
 	});
 
 	//setup watcher for pause button - not used yet
-	var i = setInterval(function() {
+	pauseInterval = setInterval(function() {
 		if(document.getElementsByClassName('player-play-pause').length > 0) {
 			document.getElementsByClassName('player-play-pause')[0].addEventListener('click', pauseFix);
-			clearInterval(i);
+			clearInterval(pauseInterval);
 		}
 	}, 1000);
 
 	//Updates start time so counter does not run while paused
 	function pauseFix() {
-		paused = true;
-		pauseStop = pauseStart ? new Date() : false;
-		pauseStart = pauseStart || new Date();
-		if(pauseStart && pauseStop) {
-			var pausedTime = pauseStop - pauseStart;
-
-			//sleepTimer - fix sleep timer so pause doesn't count
-			startTime = new Date(startTime.valueOf() + (pausedTime));
-			pauseStart = false;
-			pauseStop = false;
-			paused = false;
+		if(started) { //Verify that we are infact running first
+			paused = true;
+			pauseStop = pauseStart ? new Date() : false;	//Gets set on 'unpause'
+			pauseStart = pauseStart || new Date();			//Gets set on 'pause'
+			if(pauseStart && pauseStop) {
+				//sleepTimer - fix sleep timer so pause doesn't count
+				startTime = new Date(startTime.valueOf() + (pauseStop - pauseStart));
+				clearPause();
+			}
 		}
+	}
+
+	//clears all of the pause data so we can live to pause another day
+	function clearPause() {
+		pauseStart = false;
+		pauseStop = false;
+		paused = false;
 	}
 
 })();
