@@ -8,6 +8,7 @@
 	var sleepTimer; 			//Length of time sleep time is - in ms (0 = infinite)
 	var started;				//bool - tells if user has started sleep timer
 
+	var paused;					//bool - checks if we are paused so we don't shutdown while paused
 	var pauseStart;				//Date object of when pause stated
 	var pauseStop;				//Date object of when pause stopped
 
@@ -21,18 +22,11 @@
 
 	chrome.runtime.onMessage.addListener(function(data, sender, sendResponse) {
 		switch (data.action) {
-			case 'play-pause':
+			case 'play-pause':								
 				var play = document.getElementsByClassName('player-play-pause');
-				pauseStop = pauseStart ? new Date() : false;
-				pauseStart = pauseStart || new Date();
-				if(pauseStart && pauseStop) {
-					var pausedTime = pauseStop - pauseStart;
-
-					//sleepTimer - fix sleep timer so pause doesn't count
-				}
 				if(play.length > 0) {
 					play[0].click();
-				}				
+				}
 				break;
 
 			case 'next':
@@ -142,7 +136,7 @@
 				}
 
 				//This checks if our sleep timer has finished OR we have watched the total # of episodes we want
-				if(!sleepStarted && ((sleepTimer && timeDiff <= 0) || (sleepEpisodes && episodes >= sleepEpisodes))) {
+				if((!paused &&!sleepStarted) && ((sleepTimer && timeDiff <= 0) || (sleepEpisodes && episodes >= sleepEpisodes))) {
 					sleepStarted = true;
 					exit();
 					sleep();
@@ -173,11 +167,25 @@
 	//setup watcher for pause button - not used yet
 	var i = setInterval(function() {
 		if(document.getElementsByClassName('player-play-pause').length > 0) {
-			document.getElementsByClassName('player-play-pause')[0].addEventListener('click', function(e) {		
-				//do pause things
-			});
+			document.getElementsByClassName('player-play-pause')[0].addEventListener('click', pauseFix);
 			clearInterval(i);
 		}
 	}, 1000);
+
+	//Updates start time so counter does not run while paused
+	function pauseFix() {
+		paused = true;
+		pauseStop = pauseStart ? new Date() : false;
+		pauseStart = pauseStart || new Date();
+		if(pauseStart && pauseStop) {
+			var pausedTime = pauseStop - pauseStart;
+
+			//sleepTimer - fix sleep timer so pause doesn't count
+			startTime = new Date(startTime.valueOf() + (pausedTime));
+			pauseStart = false;
+			pauseStop = false;
+			paused = false;
+		}
+	}
 
 })();
