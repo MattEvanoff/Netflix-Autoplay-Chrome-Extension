@@ -22,7 +22,7 @@ window.addEventListener('load', function() {
 		});
 	});
 
-	document.getElementById('exit').addEventListener('click',function() {
+	document.getElementById('exit').addEventListener('click', function() {
 		chrome.tabs.getSelected(function(tab){			
 			var opts = {
 				action: 'exit'
@@ -37,16 +37,18 @@ window.addEventListener('load', function() {
 
 
 	//Setup our set/reset button
-	document.getElementById('set').addEventListener('click',function() {
+	document.getElementById('set').addEventListener('click', function() {
 		var startTime = new Date();
 		var sleepInput = document.getElementById('sleep');
 		var sleepTimer = sleepInput.value * 60 * 1000;
+		var sleepEpisodesInput = parseInt(document.getElementById('sleepEpisodes').value);
 		var sleepStarted;
 		
 		chrome.tabs.getSelected(function(tab){
 			var opts = {
 				action: 'start',
 				sleepTimer: sleepTimer,
+				sleepEpisodes: sleepEpisodesInput,
 				startTime: startTime.toString(),
 				shutdown: document.getElementById('shutdown').checked
 			};

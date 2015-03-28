@@ -4,7 +4,7 @@
     <title>Netflix Autoplay</title>
     <style type="text/css">
 	body{
-		width: 350px;
+		width: 230px;
 	}
     </style>
     <script src="popup.js"></script>
@@ -12,11 +12,19 @@
 <body>
 	Netflix Autoplayer
 	<br />
-	Sleep Timer: <input id="sleep" value="120" /> minutes
+	Sleep Timer: 
+	<br />
+	<input id="sleep" value="120" /> minutes
+	<br />
+	<input id="sleepEpisodes" value="3" /> episodes
 	<br />
 	<input type="checkbox" id="shutdown" /> Shutdown when done
 	<br />
-	Sleep in: <span id="sleepText"> - </span> minutes
+	Sleep in: 
+	<br />
+	<span id="sleepText"> - </span> minutes
+	<br />
+	<span id="sleepEpisodesText"> - </span> episodes
 	<br />
 	<button id="set">Set / Reset</button>
 	<button id="exit">Exit</button>
