@@ -67,7 +67,8 @@
 					timeDiff: interval ? parseInt((sleepTimer-(new Date() - startTime)) / 60 / 1000) : false,
 					episodes: episodes,
 					shutdown: shutdown,
-					started: started					
+					started: started,
+					eppsLeft: sleepEpisodes ? sleepEpisodes - episodes : 0
 				});
 				break;
 
