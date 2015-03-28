@@ -59,7 +59,7 @@
 
 			case 'update':
 				sendResponse({
-					timeDiff: interval ? parseInt((sleepTimer-(new Date() - startTime)) / 60 / 1000) : false,
+					timeDiff: sleepTimer ? parseInt((sleepTimer-(new Date() - startTime)) / 60 / 1000) : false,
 					episodes: episodes,
 					shutdown: shutdown,
 					started: started,
