@@ -17,3 +17,7 @@ If you open %LOCALAPPDATA%\Netflix-Autoplay\shutdown.bat it has options for Slee
 
 Oh, this only works in Chrome, and I have only tested it on Windows 7.
 
+Here is my original post about it: <a href="http://www.mattevanoff.com/2015/03/netflix-autoplay-chrome-extension-with-system-sleep/">http://www.mattevanoff.com/2015/03/netflix-autoplay-chrome-extension-with-system-sleep/</a>
+
+And here is just my website, which may or may not have updates about it: <a href="http://www.mattevanoff.com/>http://www.mattevanoff.com/</a>
+
