@@ -23,7 +23,7 @@
 
 	chrome.runtime.onMessage.addListener(function(data, sender, sendResponse) {
 		switch (data.action) {
-			case 'play-pause':								
+			case 'play-pause':
 				var play = document.getElementsByClassName('player-play-pause');
 				if(play.length > 0) {
 					play[0].click();
@@ -41,7 +41,7 @@
 				var stop = document.getElementsByClassName('player-back-to-browsing');
 				if(stop.length > 0) {
 					stop[0].click();
-				}						
+				}
 				break;
 
 			case 'prev':
@@ -81,11 +81,11 @@
 
 		clearInterval(interval);
 		interval = false;
-		
+
 		//This just delays sleep if the current episode has been minimised - we wait till the start of the next to pause and shutdown
 		pauseButton = document.getElementsByClassName('player-play-pause');
 		pauseSleepInterval = setInterval(function() {
-			if(pause.length > 0) {
+			if(pauseButton.length > 0) {
 				clearInterval(pauseSleepInterval);
 				pauseSleep = false;
 
@@ -117,7 +117,7 @@
 				if(document.getElementsByClassName('player-autoplay-interrupter').length > 0 && document.getElementsByClassName('continue-playing').length > 0) {
 					//Just click the continue button!
 					document.getElementsByClassName('continue-playing')[0].click();
-				} 
+				}
 
 				//Check if at end of season
 				if (document.getElementsByClassName('player-postplay-autoplay-header') && document.getElementsByTagName('video').length === 0 && document.getElementsByClassName('player-postplay-still-hover').length > 0) {
@@ -158,9 +158,9 @@
 			//stop the timer
 			clearInterval(interval);
 			interval = false;
-		}	
+		}
 	}
-	
+
 	document.addEventListener('keypress', function(e){
 		if(e.which === 17 && e.ctrlKey === true) {	//Ctrl + q = shutdown
 			sleepStarted = true;

@@ -1,5 +1,8 @@
 # Netflix Autoplay Chrome Extension
 
+0.7:
+Fixing javascript error
+
 Google play store link: <a href="https://chrome.google.com/webstore/detail/netflix-autoplayer-with-s/adegickccmlojbmbmemgjakpoammfmkg?utm_source=chrome-ntp-icon">https://chrome.google.com/webstore/detail/netflix-autoplayer-with-s/adegickccmlojbmbmemgjakpoammfmkg?utm_source=chrome-ntp-icon</a>
 
 Updates: 
