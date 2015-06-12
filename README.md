@@ -1,5 +1,8 @@
 # Netflix Autoplay Chrome Extension
 
+0.8
+Added support for Chromecast
+
 0.7:
 Fixing javascript error
 

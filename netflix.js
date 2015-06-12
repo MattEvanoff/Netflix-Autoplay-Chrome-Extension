@@ -134,6 +134,22 @@
 					eppEnded = true;
 				}
 
+				//Support for chromecast
+				//From: https://chrome.google.com/webstore/detail/netflix-chromecast-post-p/jellhddfmghffefbofeokbdbcnljabmg?utm_source=chrome-app-launcher-info-dialog
+				if (document.getElementById('mdx-controls-wrapper')) {
+					var player = document.getElementById('mdx-controls-wrapper').getElementsByTagName('progress')[0];
+					if(player.max > 200 && player.value + 5 > player.max) {
+						var nextEpId = 1+parseInt(document.getElementsByClassName('episode-list-item--expanded')[0].getAttribute('data-episode-id'));
+						var nextEpEl = document.querySelectorAll('[data-episode-id="'+nextEpId+'"]')[0].getElementsByClassName('play-icon')[0];
+						
+						episodes++;
+						eppEnded = true;
+
+						nextEpEl.click();
+						nextEpEl.click();						
+					}
+				}
+
 				//This is so we only count each episode once
 				if(document.getElementsByClassName('player-postplay-still-hover').length === 0) {
 					eppEnded = false;
